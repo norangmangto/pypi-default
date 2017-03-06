@@ -1,8 +1,9 @@
 import copy
 
 def default(new, base):
-    base = copy.deepcopy(base)
-    new = copy.deepcopy(new)
+    new = {} if new is None else new
+    base = {} if base is None else copy.deepcopy(base)
+
     for key in new.keys():
         base[key] = new[key]
 
