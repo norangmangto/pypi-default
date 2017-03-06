@@ -10,6 +10,15 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
+import re
+import ast
+
+_version_re = re.compile(r'__version__\s+=\s+(.*)')
+
+with open('default/__init__.py', 'rb') as f:
+    version = str(ast.literal_eval(_version_re.search(
+        f.read().decode('utf-8')).group(1)))
+
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
@@ -22,7 +31,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.1.1',
+    version=version,
 
     description='Merge JSON data with default JSON data',
     long_description=long_description,
